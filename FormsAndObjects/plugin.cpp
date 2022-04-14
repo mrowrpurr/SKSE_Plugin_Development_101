@@ -2,7 +2,6 @@
 #include <RE/C/ConsoleLog.h>
 #include <RE/P/PlayerCharacter.h>
 #include <RE/T/TES.h>
-#include <RE/T/TES.h>
 
 void PrintOutObjectReferenceInformation(RE::TESObjectREFR& ref) {
     auto name = ref.GetName();
