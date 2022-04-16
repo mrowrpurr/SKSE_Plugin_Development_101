@@ -1,10 +1,19 @@
-> _Development in progress!_
----
-
 # Example Skyrim SKSE C++ plugins 
 
 > Various small Skyrim SKSE plugins  
 > demonstrating modding capabilities.
+
+# Download
+
+Click the [Download Zip](https://github.com/mrowrpurr/Example_SKSE_plugins/archive/refs/heads/main.zip) link under "Code" on https://github.com/mrowrpurr/Example_SKSE_plugins
+
+ ```
+ git clone https://github.com/mrowrpurr/Example_SKSE_plugins.git
+ ```
+
+# Examples
+
+> Click an example below to view its documentation:
 
 1. Hello, SKSE!
 1. Working with Forms and Objects
