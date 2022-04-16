@@ -19,6 +19,7 @@ Click the [Download Zip](https://github.com/mrowrpurr/Example_SKSE_plugins/archi
 
 ## _Coming soon!_
 
+- Starter Template
 - Working with Forms and Objects
 - Listening for Skyrim events
 - Save game data
@@ -27,5 +28,4 @@ Click the [Download Zip](https://github.com/mrowrpurr/Example_SKSE_plugins/archi
 - Reading .ini files
 - Working with .yaml files
 - Working with .json files
-- Starter Template
 - Legendary Edition (_coming soon! maybe._)
