@@ -1,0 +1,70 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 21,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "vcpkg",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": {
+                    "type": "STRING",
+                    "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+                },
+                "VCPKG_TARGET_TRIPLET": {
+                    "type": "STRING",
+                    "value": "x64-windows-static-md"
+                },
+                "CMAKE_MSVC_RUNTIME_LIBRARY": {
+                    "type": "STRING",
+                    "value": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+                }
+            }
+        },
+        {
+            "name": "Debug",
+            "inherits": ["vcpkg"],
+            "displayName": "Debug",
+            "description": "Debug build for testing.",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": {
+                    "type": "STRING",
+                    "value": "Debug"
+                }
+            }
+        },
+        {
+            "name": "Release",
+            "inherits": ["vcpkg"],
+            "displayName": "Release",
+            "description": "Optimized release build.",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/relwithdebinfo",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": {
+                    "type": "STRING",
+                    "value": "RelWithDebInfo"
+                }
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Release",
+            "displayName": "Release",
+            "configurePreset": "Release",
+            "description": "Optimized release build."
+        },
+        {
+            "name": "Debug",
+            "displayName": "Debug",
+            "configurePreset": "Debug",
+            "description": "Debug build for testing."
+        }
+    ]
+}
