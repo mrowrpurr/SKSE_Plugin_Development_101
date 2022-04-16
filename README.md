@@ -15,14 +15,17 @@ Click the [Download Zip](https://github.com/mrowrpurr/Example_SKSE_plugins/archi
 
 > Click an example below to view its documentation:
 
-1. Hello, SKSE!
-1. Working with Forms and Objects
-1. Listening for Skyrim events
-1. Save game data
-1. Writing C++ Papyrus functions
-1. Calling Papyrus functions
-1. Reading .ini files
-1. Working with .yaml files
-1. Working with .json files
-1. Starter Template
-1. Legendary Edition (_coming soon! maybe._)
+- [Hello, SKSE!](HelloWorld)
+
+## _Coming soon!_
+
+- Working with Forms and Objects
+- Listening for Skyrim events
+- Save game data
+- Writing C++ Papyrus functions
+- Calling Papyrus functions
+- Reading .ini files
+- Working with .yaml files
+- Working with .json files
+- Starter Template
+- Legendary Edition (_coming soon! maybe._)
