@@ -10,6 +10,8 @@ void PrintToConsole(const std::string text, const Types&... args) {
 #include <SimpleIni.h>
 
 // .json
+#include <json/json.h>
+#include <fstream>
 
 // .yaml
 #include <yaml-cpp/yaml.h>
@@ -53,7 +55,14 @@ void ReadIni() {
 }
 
 void ReadJson() {
-
+    PrintToConsole("Read example.json");
+    std::ifstream jsonFile("Data/example.json", std::ifstream::binary);
+    Json::Value root;
+    jsonFile >> root;
+    auto greeting = root.get("greeting", "").asString();
+    auto someNumber = root.get("someNumber", 0.0).asFloat();
+    PrintToConsole("greeting: {}", greeting);
+    PrintToConsole("someNumber: {}", someNumber);
 }
 
 void ReadYaml() {
