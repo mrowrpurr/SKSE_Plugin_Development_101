@@ -1,7 +1,10 @@
-# Example Skyrim SKSE C++ plugins 
+# SKSE Plugin Development 101
 
-> Various small Skyrim SKSE plugins  
-> demonstrating modding capabilities.
+> Source code for Skyrim C++ SKSE plugin development YouTube tutorials
+
+# YouTube Playlist
+
+- TODO!
 
 # Download
 
