@@ -1,21 +1,54 @@
 #include <SKSE/SKSE.h>
 #include <RE/C/ConsoleLog.h>
 
+template <class... Types>
+void PrintToConsole(const std::string text, const Types&... args) {
+    RE::ConsoleLog::GetSingleton()->Print(std::format(text, args...).c_str());
+};
+
+// .ini
+#include <SimpleIni.h>
+
+// .json
+
+// .yaml
+
+void ReadIni() {
+    auto iniPath = "Data/example.ini";
+    CSimpleIni ini;
+    auto loadError = ini.LoadFile(iniPath);
+    if (loadError == SI_OK) {
+        auto bFoo1 = ini.GetBoolValue("ExampleSection1", "bFoo", false);
+        auto fNum = ini.GetDoubleValue("ExampleSection1", "fNum", 0.0);
+        auto bFoo2 = ini.GetBoolValue("ExampleSection2", "bFoo", true);
+        auto sHello = ini.GetValue("ExampleSection2", "sHello", "");
+        PrintToConsole("[ExampleSection1]");
+        PrintToConsole("bFoo={}", bFoo1);
+        PrintToConsole("fNum={}", fNum);
+        PrintToConsole("[ExampleSection2]");
+        PrintToConsole("bFoo={}", bFoo2);
+        PrintToConsole("sHello={}", sHello);
+    } else {
+        PrintToConsole("Could not read .ini at path '{}'", iniPath);
+    }
+}
+
+void ReadJson() {
+
+}
+
+void ReadYaml() {
+
+}
+
 extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* skse) {
     SKSE::Init(skse);
     SKSE::GetMessagingInterface()->RegisterListener([](SKSE::MessagingInterface::Message* event){
-        if (event->type == SKSE::MessagingInterface::kPostLoad) {
-            // SKSE plugins loaded. The console is not available for printing messages until kDataLoaded
-        } else if (event->type == SKSE::MessagingInterface::kDataLoaded) {
-            RE::ConsoleLog::GetSingleton()->Print("All mods loaded, Main Menu loaded.");
-        } else if (event->type == SKSE::MessagingInterface::kNewGame) {
-            RE::ConsoleLog::GetSingleton()->Print("New game.");
-        } else if (event->type == SKSE::MessagingInterface::kSaveGame) {
-            RE::ConsoleLog::GetSingleton()->Print("Save game.");
-        } else if (event->type == SKSE::MessagingInterface::kPreLoadGame) {
-            RE::ConsoleLog::GetSingleton()->Print("Before a load game is loaded");
-        } else if (event->type == SKSE::MessagingInterface::kPostLoadGame) {
-            RE::ConsoleLog::GetSingleton()->Print("After a load game has been loaded");
+        if (event->type == SKSE::MessagingInterface::kDataLoaded) {
+            PrintToConsole("Data Loaded.");
+            ReadIni();
+            ReadJson();
+            ReadYaml();
         }
     });
     return true;
