@@ -11,6 +11,9 @@
 //
 #include <RE/S/ScriptEventSourceHolder.h>
 
+//
+#include <RE/T/TESForm.h>
+
 // You do not need to understand this bit to make SKSE plugins :)
 template <class... Types>
 void PrintToConsole(const std::string text, const Types&... args) {
@@ -39,12 +42,32 @@ std::unordered_map<RE::FormID, int> HitCountPerAggressor;
 static void ListenForHitEvents() {
     auto* scriptEvents = RE::ScriptEventSourceHolder::GetSingleton();
     scriptEvents->AddEventSink<RE::TESHitEvent>(new OnTESHitEventSink([](const RE::TESHitEvent* event){
-        PrintToConsole("Hit!");
         if (event->cause) {
+
+            // Add agressor to vector
             HitAggressors.emplace_back(event->cause.get());
-            PrintToConsole("{} hit {}",
-                event->cause.get()->GetBaseObject()->GetName(),
-                event->target.get()->GetBaseObject()->GetName());
+
+            // Add/update aggressor and hit count to map
+            auto aggressorFormID = event->cause.get()->formID;
+            int hitCount = HitCountPerAggressor[aggressorFormID];
+            HitCountPerAggressor[aggressorFormID] = hitCount + 1;
+
+            // Now...
+
+            /*  Loop thru the aggressors and print out their names
+                with how many times they have hit us.
+                The use of BOTH a vector AND an unordered_map
+                is just for demonstration purposes:
+            */
+            for (auto* aggressor : HitAggressors) {
+                PrintToConsole("Aggressor: {}", aggressor->GetBaseObject()->GetName());
+            }
+
+            // Alternatively, loop thru using only the map's keys and values:
+            for (const auto [aggressorId, count] : HitCountPerAggressor) {
+                auto* aggressor = skyrim_cast<RE::TESObjectREFR*>(RE::TESForm::LookupByID(aggressorId));
+                PrintToConsole("Aggressor: {} Count: {}", aggressor->GetBaseObject()->GetName(), count);
+            }
         }
     }));
 }
@@ -70,16 +93,9 @@ void Sample() {
     // bool, int, float, std::string
     // Print to console including std::format
 
-    // Array
-    // OnHit Form IDs of every aggressor that's hit the player character
-    // vector
+    // OnHit Form IDs of every aggressor that's hit the player character: vector
+    // OnHit Form IDs for every aggressor and how many times they've hit the player character: map
     ListenForHitEvents();
-
-    // Hash
-    // Loop thru Forms, build Hash of incrementing count indexed by name
-    // unordered_map
-
-
 }
 
 extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* skse) {
