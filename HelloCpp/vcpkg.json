@@ -3,6 +3,6 @@
     "name": "sample-plugin",
     "version-string": "0.0.1",
     "dependencies": [
-        "commonlibsse-ng-prebuilt"
+        "simpleini"
     ]
 }

@@ -7,7 +7,7 @@ extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadIn
         if (event->type == SKSE::MessagingInterface::kPostLoad) {
             // SKSE plugins loaded. The console is not available for printing messages until kDataLoaded
         } else if (event->type == SKSE::MessagingInterface::kDataLoaded) {
-            RE::ConsoleLog::GetSingleton()->Print("All mods loaded, Main Menu loaded.");
+            RE::ConsoleLog::GetSingleton()->Print("All mods loaded, Main Menu loaded. I CHANGED THIS!");
         } else if (event->type == SKSE::MessagingInterface::kNewGame) {
             RE::ConsoleLog::GetSingleton()->Print("New game.");
         } else if (event->type == SKSE::MessagingInterface::kSaveGame) {
