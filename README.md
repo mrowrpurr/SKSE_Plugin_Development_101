@@ -2,10 +2,6 @@
 
 > Source code for Skyrim C++ SKSE plugin development YouTube tutorials
 
-# YouTube Playlist
-
-- TODO!
-
 # Download
 
 Click the [Download Zip](https://github.com/mrowrpurr/Example_SKSE_plugins/archive/refs/heads/main.zip) link under "Code" on https://github.com/mrowrpurr/Example_SKSE_plugins
