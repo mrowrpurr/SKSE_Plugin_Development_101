@@ -18,8 +18,8 @@ Click the [Download Zip](https://github.com/mrowrpurr/Example_SKSE_plugins/archi
 
 > Click an example below to view its documentation:
 
-- [Hello, C++](HelloCpp)
-- [Hello, SKSE!](HelloWorld)
+- [Hello, C++](HelloCpp#readme)
+- [Hello, SKSE!](HelloWorld#readme)
 
 ## _Coming soon!_
 
