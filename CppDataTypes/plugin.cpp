@@ -1,5 +1,15 @@
+#include <RE/Skyrim.h>
 #include <SKSE/SKSE.h>
+#include <REL/Relocation.h>
+
+//
 #include <RE/C/ConsoleLog.h>
+
+//
+#include <RE/T/TESHitEvent.h>
+
+//
+#include <RE/S/ScriptEventSourceHolder.h>
 
 // You do not need to understand this bit to make SKSE plugins :)
 template <class... Types>
@@ -7,11 +17,37 @@ void PrintToConsole(const std::string text, const Types&... args) {
     RE::ConsoleLog::GetSingleton()->Print(std::format(text, args...).c_str());
 };
 
+//
+class OnTESHitEventSink : public RE::BSTEventSink<RE::TESHitEvent> {
+    std::function<void(const RE::TESHitEvent* event)> _eventCallback;
+
+public:
+    explicit OnTESHitEventSink(std::function<void(const RE::TESHitEvent* event)> eventCallback) : _eventCallback(std::move(eventCallback)) {}
+
+    RE::BSEventNotifyControl ProcessEvent(const RE::TESHitEvent* event, RE::BSTEventSource<RE::TESHitEvent>*) override {
+        _eventCallback(event);
+        return RE::BSEventNotifyControl::kContinue;
+    }
+};
+
 // 
-std::vector<RE::FormID> HitAggressors;
+std::vector<RE::TESObjectREFR*> HitAggressors;
 
 //
 std::unordered_map<RE::FormID, int> HitCountPerAggressor;
+
+static void ListenForHitEvents() {
+    auto* scriptEvents = RE::ScriptEventSourceHolder::GetSingleton();
+    scriptEvents->AddEventSink<RE::TESHitEvent>(new OnTESHitEventSink([](const RE::TESHitEvent* event){
+        PrintToConsole("Hit!");
+        if (event->cause) {
+            HitAggressors.emplace_back(event->cause.get());
+            PrintToConsole("{} hit {}",
+                event->cause.get()->GetBaseObject()->GetName(),
+                event->target.get()->GetBaseObject()->GetName());
+        }
+    }));
+}
 
 void Sample() {
 
@@ -20,14 +56,14 @@ void Sample() {
     float f = 6.9;
     std::string s = "Hello, world!";
 
-    auto a = false;
-    auto b = 420;
-    auto c = 6.9;
-    auto d = "Hello, world!";
+    auto bAuto = false;
+    auto iAuto = 420;
+    auto dAuto = 6.9;
+    auto cAuto = "Hello, world!";
 
     auto* console = RE::ConsoleLog::GetSingleton();
 
-    auto output = std::format("{} {} {} {}", a, b, c, d);
+    auto output = std::format("{} {} {} {}", bAuto, iAuto, dAuto, cAuto);
 
     console->Print(output.c_str());
 
@@ -37,10 +73,12 @@ void Sample() {
     // Array
     // OnHit Form IDs of every aggressor that's hit the player character
     // vector
+    ListenForHitEvents();
 
     // Hash
     // Loop thru Forms, build Hash of incrementing count indexed by name
     // unordered_map
+
 
 }
 
