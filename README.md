@@ -1,4 +1,4 @@
-# SKSE Plugin Development 101
+# C++ SKSE Plugin Development 101
 
 > Source code for Skyrim C++ SKSE plugin development YouTube tutorials
 
