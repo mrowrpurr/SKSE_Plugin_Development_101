@@ -7,7 +7,7 @@ extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadIn
         if (event->type == SKSE::MessagingInterface::kPostLoad) {
             // SKSE plugins loaded. The console is not available for printing messages until kDataLoaded
         } else if (event->type == SKSE::MessagingInterface::kDataLoaded) {
-            RE::ConsoleLog::GetSingleton()->Print("All mods loaded, Main Menu loaded. I CHANGED THIS!");
+            RE::ConsoleLog::GetSingleton()->Print("Hello, SKSE! Main Menu & all plugins loaded.");
         } else if (event->type == SKSE::MessagingInterface::kNewGame) {
             RE::ConsoleLog::GetSingleton()->Print("New game.");
         } else if (event->type == SKSE::MessagingInterface::kSaveGame) {
@@ -22,15 +22,15 @@ extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadIn
 }
 
 extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface*, SKSE::PluginInfo* info) {
+    info->name = "HelloSKSE";
     info->infoVersion = SKSE::PluginInfo::kVersion;
-    info->name = "HelloSkse";
     info->version = 1;
     return true;
 }
 
 extern "C" __declspec(dllexport) constinit auto SKSEPlugin_Version = [](){
     SKSE::PluginVersionData version;
-    version.PluginName("HelloSkse");
+    version.PluginName("HelloSKSE");
     version.PluginVersion({ 0, 0, 1 });
     version.CompatibleVersions({ SKSE::RUNTIME_LATEST });
     return version;
