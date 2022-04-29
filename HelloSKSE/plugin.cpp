@@ -24,6 +24,11 @@ extern "C" __declspec(dllexport) bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadIn
             // SKSE plugins loaded. The console is not available for printing messages until kDataLoaded
         } else if (event->type == SKSE::MessagingInterface::kDataLoaded) {
             RE::ConsoleLog::GetSingleton()->Print("Hello, SKSE! Main Menu & all plugins loaded.");
+
+            auto* log = RE::ConsoleLog::GetSingleton();
+            if (true) log = nullptr;
+            log->Print("KABOOM!");
+
         } else if (event->type == SKSE::MessagingInterface::kNewGame) {
             RE::ConsoleLog::GetSingleton()->Print("New game.");
         } else if (event->type == SKSE::MessagingInterface::kSaveGame) {
