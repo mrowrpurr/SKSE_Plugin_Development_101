@@ -33,5 +33,6 @@ extern "C" __declspec(dllexport) constinit auto SKSEPlugin_Version = [](){
     version.PluginName("HelloSKSE");
     version.PluginVersion({ 0, 0, 1 });
     version.CompatibleVersions({ SKSE::RUNTIME_LATEST });
+    version.UsesAddressLibrary(true);
     return version;
 }();
