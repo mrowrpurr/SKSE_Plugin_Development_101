@@ -26,6 +26,17 @@ if(DEFINED ENV{SKYRIM_MODS})
 		COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:${PROJECT_NAME}>" "${DLL_FOLDER}/${PROJECT_NAME}.dll"
 		VERBATIM
 	)
+
+	# SKSE plugin .pdb with debug symbols is copied to the specified folder
+	# (after performing a Debug build)
+	if(CMAKE_BUILD_TYPE STREQUAL Debug)
+		add_custom_command(
+			TARGET "${PROJECT_NAME}"
+			POST_BUILD
+			COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_PDB_FILE:${PROJECT_NAME}>" "${DLL_FOLDER}/${PROJECT_NAME}.pdb"
+			VERBATIM
+		)
+	endif()
 else()
 	message(WARNING "Please set SKYRIM_MODS environment variable to the path to your Skyrim mods folder")
 endif()
