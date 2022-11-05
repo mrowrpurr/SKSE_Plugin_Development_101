@@ -1,11 +1,14 @@
 #include "Logging.h"
 
+// Because VS Code kinda sucks...
+#include <SKSE/SKSE.h>
+
 SKSEPluginLoad(const SKSE::LoadInterface* skse) {
-         InitializeLog();
-         logger::info("Well, hello there logger!");
-         SKSE::Init(skse);
+    InitializeLog();
+    logger::info("Well, hello there logger!");
+    SKSE::Init(skse);
     SKSE::GetMessagingInterface()->RegisterListener([](SKSE::MessagingInterface::Message* event){
-        if (event->type == SKSE::MessagingInterface::kPostLoad) {
+    if (event->type == SKSE::MessagingInterface::kPostLoad) {
             // SKSE plugins loaded. The console is not available for printing messages until kDataLoaded
         } else if (event->type == SKSE::MessagingInterface::kDataLoaded) {
             RE::ConsoleLog::GetSingleton()->Print("Hello, SKSE! Main Menu & all plugins loaded. 3");
