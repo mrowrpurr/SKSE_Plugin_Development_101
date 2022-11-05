@@ -1,14 +1,14 @@
 #include "Logging.h"
 
 SKSEPluginLoad(const SKSE::LoadInterface* skse) {
-         SKSE::Init(skse);
          InitializeLog();
          logger::info("Well, hello there logger!");
+         SKSE::Init(skse);
     SKSE::GetMessagingInterface()->RegisterListener([](SKSE::MessagingInterface::Message* event){
         if (event->type == SKSE::MessagingInterface::kPostLoad) {
             // SKSE plugins loaded. The console is not available for printing messages until kDataLoaded
         } else if (event->type == SKSE::MessagingInterface::kDataLoaded) {
-            RE::ConsoleLog::GetSingleton()->Print("Hello, SKSE! Main Menu & all plugins loaded. 2");
+            RE::ConsoleLog::GetSingleton()->Print("Hello, SKSE! Main Menu & all plugins loaded. 3");
             logger::info("kDataLoaded!");
         } else if (event->type == SKSE::MessagingInterface::kNewGame) {
             RE::ConsoleLog::GetSingleton()->Print("New game.");
