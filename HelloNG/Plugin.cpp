@@ -1,8 +1,5 @@
 #include "Logging.h"
 
-// Because VS Code kinda sucks...
-#include <SKSE/SKSE.h>
-
 SKSEPluginLoad(const SKSE::LoadInterface* skse) {
     InitializeLog();
     logger::info("Well, hello there logger!");
