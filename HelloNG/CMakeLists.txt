@@ -6,13 +6,14 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(CommonLibSSE CONFIG REQUIRED)
-add_commonlibsse_plugin(${PROJECT_NAME} SOURCES PCH.h Logging.h Plugin.cpp)
 
 target_precompile_headers(
 	"${PROJECT_NAME}"
 	PRIVATE
 		PCH.h
 )
+
+add_commonlibsse_plugin(${PROJECT_NAME} SOURCES PCH.h Logging.h Plugin.cpp)
 
 set(DLL_FOLDER "C:\\Users\\mrowr\\Dropbox\\Skyrim\\Purrrect Modlist\\Mods\\[Mrowr Purr] SKSE Dev\\SKSE\\Plugins")
 

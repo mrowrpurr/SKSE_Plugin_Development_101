@@ -8,8 +8,10 @@ SKSEPluginLoad(const SKSE::LoadInterface* skse) {
     logger::info("Well, hello there logger!");
     SKSE::Init(skse);
     SKSE::GetMessagingInterface()->RegisterListener([](SKSE::MessagingInterface::Message* event){
-    if (event->type == SKSE::MessagingInterface::kPostLoad) {
-            // SKSE plugins loaded. The console is not available for printing messages until kDataLoaded
+        if (event->type == SKSE::MessagingInterface::kPostLoad) {
+            // SKSE plugins loaded!
+            // The console is not available for printing messages until kDataLoaded
+            // So do nothing here.
         } else if (event->type == SKSE::MessagingInterface::kDataLoaded) {
             RE::ConsoleLog::GetSingleton()->Print("Hello, SKSE! Main Menu & all plugins loaded. 3");
             logger::info("kDataLoaded!");
