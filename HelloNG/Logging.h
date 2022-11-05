@@ -1,16 +1,11 @@
 void InitializeLog()
 	{
-#ifndef NDEBUG
-		auto sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
-#else
 		auto path = logger::log_directory();
 		if (!path) {
 			stl::report_and_fail("Failed to find standard logging directory"sv);
 		}
-
-		*path /= fmt::format("{}.log", Plugin::NAME);
+		*path /= fmt::format("{}.log", SKSE::PluginDeclaration::GetSingleton()->GetName());
 		auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
-#endif
 
 #ifndef NDEBUG
 		const auto level = spdlog::level::trace;
