@@ -44,10 +44,8 @@ namespace WinAPI = SKSE::WinAPI;
 
 using namespace std::literals;
 
-namespace stl
-{
+namespace stl {
 	using namespace SKSE::stl;
-
 	constexpr std::string_view safe_string(const char* a_str) { return a_str ? a_str : ""sv; }
 }
 
